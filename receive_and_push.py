@@ -106,8 +106,13 @@ def connect_with_retries():
 
 # === Entry Point ===
 if __name__ == "__main__":
+    print("🚀 Starting script")
+    print("API_KEY:", API_KEY)
+    print("MMSI:", MMSI_TARGET)
+    
     if not API_KEY:
         print("ERROR: AISSTREAM_API_KEY is not set!")
         exit(1)
 
     connect_with_retries()
+
