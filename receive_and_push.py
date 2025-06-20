@@ -6,9 +6,13 @@ import time
 from datetime import datetime
 from dotenv import load_dotenv
 
+print("🟢 Script started")
+print("API_KEY:", API_KEY)
+print("MMSI_TARGET:", MMSI_TARGET)
+
 # === Load env ===
 load_dotenv()
-API_KEY = os.environ.get("AISSTREAM_API_KEY")
+API_KEY = os.environ.get("API_KEY")
 MMSI_TARGET = os.environ.get("TARGET_MMSI")
 DATA_FILE = "data.json"
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -109,9 +113,9 @@ if __name__ == "__main__":
     print("🚀 Starting script")
     print("API_KEY:", API_KEY)
     print("MMSI:", MMSI_TARGET)
-    
+
     if not API_KEY:
-        print("ERROR: AISSTREAM_API_KEY is not set!")
+        print("ERROR: API_KEY is not set!")
         exit(1)
 
     connect_with_retries()
