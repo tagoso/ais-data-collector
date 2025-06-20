@@ -36,14 +36,18 @@ def git_push():
 def on_message(ws, message):
     try:
         data = json.loads(message)
-        if data.get("MMSI") == MMSI_TARGET:
+
+        metadata = data.get("MetaData", {})
+        mmsi = str(metadata.get("MMSI"))
+
+        if mmsi == MMSI_TARGET:
             print(f"✅ Matched MMSI: {MMSI_TARGET}")
             entry = {
-                "timestamp": datetime.utcnow().isoformat(),
-                "lat": data.get("LAT"),
-                "lon": data.get("LON"),
-                "speed": data.get("SPEED"),
-                "course": data.get("COURSE")
+                "timestamp": metadata.get("time_utc"),
+                "lat": metadata.get("latitude"),
+                "lon": metadata.get("longitude"),
+                "speed": data["Message"]["PositionReport"].get("Sog"),
+                "course": data["Message"]["PositionReport"].get("Cog")
             }
             existing = load_existing_data()
             existing.append(entry)
