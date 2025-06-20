@@ -52,10 +52,17 @@ def on_message(ws, message):
         print("Error processing message:", e)
 
 def on_open(ws):
-    ws.send(json.dumps({
+    if not API_KEY:
+        print("❌ API_KEY is missing or not set!")
+        ws.close()
+        return
+
+    auth_message = {
         "APIKey": API_KEY
-    }))
-    print("WebSocket connection opened")
+    }
+
+    print("✅ Sending auth message:", auth_message)  # ← check inside
+    ws.send(json.dumps(auth_message))
 
 def on_error(ws, error):
     print("WebSocket error:", error)
