@@ -6,10 +6,6 @@ import time
 from datetime import datetime
 from dotenv import load_dotenv
 
-print("🟢 Script started")
-print("API_KEY:", API_KEY)
-print("MMSI_TARGET:", MMSI_TARGET)
-
 # === Load env ===
 load_dotenv()
 API_KEY = os.environ.get("API_KEY")
